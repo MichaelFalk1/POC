@@ -4,9 +4,11 @@ import axios from 'axios';
 
 
 function Leave() {
+
 const Startdate = useRef();
 const Enddate = useRef();
 const LeaveDay = useRef();
+
   const [LeaveDays, setLeaveDays] = useState(0);
   const[name, setName] = useState("");
   const[Sdate, setSdate] = useState("");
@@ -16,10 +18,14 @@ const LeaveDay = useRef();
 
    
 const submit =()=>{
-  axios.post('http://localhost:3001/api/insert',{Name:name,Sdate:Sdate,Edate:Edate,LeaveType:LeaveType,LeaveReason:LeaveReason,LeaveDays:LeaveDays}).then(()=>{
-    alert("Leave hase been logged");
-  });
-};
+  if(LeaveDays < 0){
+      alert("End Date must be larger then Start Date");
+  }else{
+    axios.post('http://localhost:3001/api/insert',{Name:name,Sdate:Sdate,Edate:Edate,LeaveType:LeaveType,LeaveReason:LeaveReason,LeaveDays:LeaveDays}).then(()=>{
+      alert("Leave hase been logged");
+    });
+    
+  }};
 
     
 
@@ -34,8 +40,10 @@ const submit =()=>{
     const date1 = Startdate.current.value.split("/");
     const date2 = Enddate.current.value.split("/");
     let num=(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / (1000 * 60 * 60 * 24); 
-    LeaveDay.current.innerHTML = ( num);
     setLeaveDays(num);
+    LeaveDay.current.innerHTML = "Leave Days: " + num;
+
+    
     
       
     
@@ -44,10 +52,10 @@ const submit =()=>{
     <> 
   
    <div >
-      <h1>React App</h1>
-        <form  className="app" action="procss">
+      <h1>Leave App</h1>
+        <form  className="app">
 
-          <label  ref={LeaveDay} id="LeaveDay" className="LeaveDay"></label>
+          
           <label>
             Name & Surname:
             <input onChange={(e)=>{setName(e.target.value)}} type="text" name="name" placeholder="Michael Falk"/>
@@ -62,6 +70,8 @@ const submit =()=>{
             Leave End Date:
             <input onChange={CalculateLeaveDays} ref={Enddate}  type="text" name="name" placeholder="2022/06/22"/>
           </label>
+
+          <label  ref={LeaveDay}>Leave Days: </label>
 
           <label>
             Leave Type:
@@ -78,7 +88,7 @@ const submit =()=>{
           </label>
           <textarea onChange={(e)=>{setLeaveReason(e.target.value)}} name="LeaveReason" id="LeaveReason" cols="30" rows="5" placeholder="Give your reasone here"></textarea>
 
-          <button onClick={submit}>Submit</button>
+          <button id='SubmitButton' onClick={submit}>Submit</button>
         </form>
 
     </div>

@@ -46,7 +46,7 @@ input{
     border-radius: 25px;
     
 }
-button{
+#SubmitButton{
     width: 70%;
     height: 10%;
     border: 1px solid black;
@@ -98,47 +98,10 @@ textarea{
     
     
 }
-.admin{
-    position: relative;
-    left: 35%;
-    width: 20%;    
-    padding-right: 1%;
-    padding-top: 5%;
-    
-   
-    
-    
-}
-table{
-    position: relative;
-    left: 35%;
-    width: 20%;    
-    padding-right: 1%;
-    padding-top: 5%;
-    
-   
-    
-    
-}
-tr{
-    position: relative;
-    left: 35%;
-    width: 20%;    
-    padding-right: 1%;
-    padding-top: 5%;
-    
-   
-    
-    
-}
-th{
-    position: relative;
-    left: 35%;
-    width: 20%;    
-    padding-right: 1%;
-    padding-top: 5%;
-    
-   
-    
-    
-}
+.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333; text-align: center;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}

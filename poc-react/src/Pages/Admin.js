@@ -12,23 +12,55 @@ const [Leave, setLeave] = useState([]);
         },[]);
     });
 
+    const approve = (name) => {
+        axios.put(`http://localhost:3001/api/update/${name}`,{
+        });
+    }
+
     return (<>
-            
+    
+    <h1>Admin Approve Table</h1>
+    
+    <table className="tg">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Leave Type</th>
+            <th>Leave Reason</th>
+            <th>Leave Days</th>
+            <th>Approved</th>
+            <th>Approve Button</th>
+        </tr>
+        </thead>
+        <tbody>
         {Leave.map((val) => {
             return (<>
-                <div className="card">
-                    <h1>{val.name}</h1>
-                    <p>{val.Sdate}</p>
-                    <p>{val.Edate}</p>
-                    <p>{val.LeaveType}</p>
-                    <p>{val.LeaveReason}</p>
-                    <p>{val.LeaveDays}</p>
-                </div>
+                
+                
+                    <tr>
+                        <td>{val.name}</td>
+                        <td>{val.Sdate}</td>
+                        <td>{val.Edate}</td>
+                        <td>{val.LeaveType}</td>
+                        <td>{val.LeaveReason}</td>
+                        <td>{val.LeaveDays}</td>
+                        <td>{val.LeaveApproved}</td>
+                        <td><button onClick={() => {approve(val.name)}}>Approve</button></td> 
+                    </tr>
+
+                
+                
             </>
             );
         })
 
         }
+        </tbody>
+    </table>
+            
+        
     </>
     );
 }
