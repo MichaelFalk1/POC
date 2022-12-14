@@ -1,2 +1,2 @@
 # POC
-Work Assignment (Leave Web Page &amp; Admin Page)
+Work Assignment (Leave Web Page & Admin Page)
