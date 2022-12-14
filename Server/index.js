@@ -31,12 +31,19 @@ app.get('/api/get', (req, res) => {
         res.send(result);
     });
 });
-app.put('/api/update/:name', (req, res) => {
+app.put('/api/update/approve/:name', (req, res) => {
     const name = req.params.name;
     const sqlUpdate = "UPDATE leave_table SET LeaveApproved = 'Approved' WHERE name = ?";
     con.query(sqlUpdate, name, (err, result) => {
         if(err) console.log(err);
     });
+});
+app.put('/api/update/denied/:name', (req, res) => {
+  const name = req.params.name;
+  const sqlUpdate = "UPDATE leave_table SET LeaveApproved = 'Denied' WHERE name = ?";
+  con.query(sqlUpdate, name, (err, result) => {
+      if(err) console.log(err);
+  });
 });
 
 app.post('/api/insert', (req, res) => {
@@ -46,7 +53,7 @@ app.post('/api/insert', (req, res) => {
   const LeaveType = req.body.LeaveType;
   const LeaveReason = req.body.LeaveReason;
   const LeaveDays = req.body.LeaveDays;
-  const LeaveApproved = "Denied";
+  const LeaveApproved = "Pending";
   
 const sqlInsert = "INSERT INTO leave_table (name, Sdate, Edate, LeaveType, LeaveReason,LeaveDays,LeaveApproved) VALUES (?,?,?,?,?,?,?)";
 con.query(sqlInsert, [Name, Sdate, Edate, LeaveType, LeaveReason, LeaveDays,LeaveApproved], (err, result) => {

@@ -13,7 +13,11 @@ const [Leave, setLeave] = useState([]);
     });
 
     const approve = (name) => {
-        axios.put(`http://localhost:3001/api/update/${name}`,{
+        axios.put(`http://localhost:3001/api/update/approve/${name}`,{
+        });
+    }
+    const denied = (name) => {
+        axios.put(`http://localhost:3001/api/update/denied/${name}`,{
         });
     }
 
@@ -32,6 +36,7 @@ const [Leave, setLeave] = useState([]);
             <th>Leave Days</th>
             <th>Approved</th>
             <th>Approve Button</th>
+            <th>Denied Button</th>
         </tr>
         </thead>
         <tbody>
@@ -47,7 +52,8 @@ const [Leave, setLeave] = useState([]);
                         <td>{val.LeaveReason}</td>
                         <td>{val.LeaveDays}</td>
                         <td>{val.LeaveApproved}</td>
-                        <td><button onClick={() => {approve(val.name)}}>Approve</button></td> 
+                        <td><button onClick={() => {approve(val.name)}}>Approve</button></td>
+                        <td><button onClick={() => {denied(val.name)}}>Denied</button></td> 
                     </tr>
 
                 
