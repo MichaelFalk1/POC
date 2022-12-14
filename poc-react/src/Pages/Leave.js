@@ -1,5 +1,7 @@
 import React,{useRef} from 'react';
 
+
+
 function Leave() {
   const name = useRef();
     const Sdate = useRef();
@@ -7,14 +9,23 @@ function Leave() {
     const LeaveType = useRef();
     const LeaveReason = useRef();
     const LeaveDays = useRef();
+
+    
+
     
   function FormHandler(e){
     e.preventDefault();
-    console.log(name.current.value);
-    console.log(Sdate.current.value);
-    console.log(Edate.current.value);
-    console.log(LeaveType.current.value);
-    console.log(LeaveReason.current.value);
+    let data = {
+      name: name.current.value,
+      Sdate: Sdate.current.value,
+      Edate: Edate.current.value,
+      LeaveType: LeaveType.current.value,
+      LeaveReason: LeaveReason.current.value,
+      LeaveDays: LeaveDays.current.innerHTML
+  };
+  
+    console.log(data);
+    
   }
 
   function CalculateLeaveDays(e){
