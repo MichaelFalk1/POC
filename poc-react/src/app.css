@@ -87,7 +87,51 @@ textarea{
     padding: 5px;
     ;
 }
-.LeaveDays{
+.LeaveDay{
+    position: relative;
+    left: 35%;
+    width: 20%;    
+    padding-right: 1%;
+    padding-top: 5%;
+    
+   
+    
+    
+}
+.admin{
+    position: relative;
+    left: 35%;
+    width: 20%;    
+    padding-right: 1%;
+    padding-top: 5%;
+    
+   
+    
+    
+}
+table{
+    position: relative;
+    left: 35%;
+    width: 20%;    
+    padding-right: 1%;
+    padding-top: 5%;
+    
+   
+    
+    
+}
+tr{
+    position: relative;
+    left: 35%;
+    width: 20%;    
+    padding-right: 1%;
+    padding-top: 5%;
+    
+   
+    
+    
+}
+th{
     position: relative;
     left: 35%;
     width: 20%;    

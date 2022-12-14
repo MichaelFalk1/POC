@@ -1,41 +1,41 @@
-import React,{useRef} from 'react';
+import React,{useRef,useState} from 'react';
+import axios from 'axios';
 
 
 
 function Leave() {
-  const name = useRef();
-    const Sdate = useRef();
-    const Edate = useRef();
-    const LeaveType = useRef();
-    const LeaveReason = useRef();
-    const LeaveDays = useRef();
+const Startdate = useRef();
+const Enddate = useRef();
+const LeaveDay = useRef();
+  const [LeaveDays, setLeaveDays] = useState(0);
+  const[name, setName] = useState("");
+  const[Sdate, setSdate] = useState("");
+  const[Edate, setEdate] = useState("");
+  const[LeaveType, setLeaveType] = useState("");
+  const[LeaveReason, setLeaveReason] = useState("");
+
+   
+const submit =()=>{
+  axios.post('http://localhost:3001/api/insert',{Name:name,Sdate:Sdate,Edate:Edate,LeaveType:LeaveType,LeaveReason:LeaveReason,LeaveDays:LeaveDays}).then(()=>{
+    alert("Leave hase been logged");
+  });
+};
 
     
 
     
-  function FormHandler(e){
-    e.preventDefault();
-    let data = {
-      name: name.current.value,
-      Sdate: Sdate.current.value,
-      Edate: Edate.current.value,
-      LeaveType: LeaveType.current.value,
-      LeaveReason: LeaveReason.current.value,
-      LeaveDays: LeaveDays.current.innerHTML
-  };
-  
-    console.log(data);
-    
-  }
+
 
   function CalculateLeaveDays(e){
     
     e.preventDefault();
-    
-    const date1 = Sdate.current.value.split("/");
-    const date2 = Edate.current.value.split("/");
+    setEdate(Enddate.current.value);
+    setSdate(Startdate.current.value);
+    const date1 = Startdate.current.value.split("/");
+    const date2 = Enddate.current.value.split("/");
     let num=(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / (1000 * 60 * 60 * 24); 
-    LeaveDays.current.innerHTML = "Leave Days: " + ( num);
+    LeaveDay.current.innerHTML = ( num);
+    setLeaveDays(num);
     
       
     
@@ -45,27 +45,27 @@ function Leave() {
   
    <div >
       <h1>React App</h1>
-        <form onSubmit={FormHandler} className="app" action="procss">
+        <form  className="app" action="procss">
 
-          <label ref={LeaveDays}  id="LeaveDays" className="LeaveDays"></label>
+          <label  ref={LeaveDay} id="LeaveDay" className="LeaveDay"></label>
           <label>
             Name & Surname:
-            <input ref={name} type="text" name="name" placeholder="Michael Falk"/>
+            <input onChange={(e)=>{setName(e.target.value)}} type="text" name="name" placeholder="Michael Falk"/>
           </label>
 
           <label>
             Leave Start Date:
-            <input onChange={CalculateLeaveDays} ref={Sdate} type="text" name="name" placeholder="2022/06/12"/>
+            <input onChange={CalculateLeaveDays} ref={Startdate} type="text" name="name" placeholder="2022/06/12"/>
           </label>
 
           <label>
             Leave End Date:
-            <input onChange={CalculateLeaveDays} ref={Edate} type="text" name="name" placeholder="2022/06/22"/>
+            <input onChange={CalculateLeaveDays} ref={Enddate}  type="text" name="name" placeholder="2022/06/22"/>
           </label>
 
           <label>
             Leave Type:
-            <select ref={LeaveType} name="LeaveSelect" id="LeaveType">
+            <select onChange={(e)=>{setLeaveType(e.target.value)}} name="LeaveSelect" id="LeaveType">
               <option value="Type 1">Type 1</option>
               <option value="Type 2">Type 2</option>
               <option value="Type 3">Type 3</option>
@@ -76,9 +76,9 @@ function Leave() {
           <label>
             Leave Reason:          
           </label>
-          <textarea ref={LeaveReason} name="LeaveReason" id="LeaveReason" cols="30" rows="5" placeholder="Give your reasone here"></textarea>
+          <textarea onChange={(e)=>{setLeaveReason(e.target.value)}} name="LeaveReason" id="LeaveReason" cols="30" rows="5" placeholder="Give your reasone here"></textarea>
 
-          <button type="submit">Submit</button>
+          <button onClick={submit}>Submit</button>
         </form>
 
     </div>
