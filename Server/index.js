@@ -73,10 +73,12 @@ con.query(sqlInsert, [Name, Sdate, Edate, LeaveType, LeaveReason, LeaveDays,Leav
 
 app.post('/api/calender', (req, res) => {
     res.send("Values inserted");
-    const Sdate = req.body.Sdate;
-    const Edate = req.body.Edate;
+    const Sdate = new Date(req.body.Sdate);
+    const Edate = new Date(req.body.Edate);
     const LeaveType = req.body.LeaveType;
     const LeaveReason = req.body.LeaveReason;
+    
+    
 
     const event = {
                 summary: LeaveType,
@@ -93,6 +95,7 @@ app.post('/api/calender', (req, res) => {
                 colorId: 1,
 
             };
+            console.log(event);
             callander.freebusy.query({
                 resource: {
                     timeMin: Sdate,
