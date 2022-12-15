@@ -2,7 +2,6 @@ import React, {useState,useEffect} from "react";
 import axios from 'axios';
 
 
-
 function Admin() {
 const [Leave, setLeave] = useState([]);
 
@@ -12,10 +11,15 @@ const [Leave, setLeave] = useState([]);
         },[]);
     });
 
-    const approve = (name) => {
+    const approve = (name,sdate,edate,leavetype,leavereason) => {
         axios.put(`http://localhost:3001/api/update/approve/${name}`,{
         });
-    }
+
+        axios.post('http://localhost:3001/api/calender',{Sdate:sdate,Edate:edate,LeaveType:leavetype,LeaveReason:leavereason}).then(()=>{
+            console.log('Date Leave has been sent to calender');
+        });
+    } 
+   
     const denied = (name) => {
         axios.put(`http://localhost:3001/api/update/denied/${name}`,{
         });
@@ -51,8 +55,8 @@ const [Leave, setLeave] = useState([]);
                         <td>{val.LeaveType}</td>
                         <td>{val.LeaveReason}</td>
                         <td>{val.LeaveDays}</td>
-                        <td>{val.LeaveApproved}</td>
-                        <td><button onClick={() => {approve(val.name)}}>Approve</button></td>
+                        <td >{val.LeaveApproved}</td>
+                        <td><button onClick={() => {approve(val.name,val.sdate,val.edate,val.leavetype,val.LeaveReason)}}>Approve</button></td>
                         <td><button onClick={() => {denied(val.name)}}>Denied</button></td> 
                     </tr>
 
